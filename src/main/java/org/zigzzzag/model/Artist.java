@@ -1,5 +1,6 @@
 package org.zigzzzag.model;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class Artist {
@@ -24,6 +25,23 @@ public class Artist {
         this.name = name;
         this.members = members;
         this.origin = origin;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Artist artist = (Artist) o;
+        return Objects.equals(name, artist.name) &&
+                Objects.equals(members, artist.members) &&
+                Objects.equals(origin, artist.origin);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(name, members, origin);
     }
 
     public String getName() {

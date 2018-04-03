@@ -1,6 +1,7 @@
 package org.zigzzzag.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Album {
 
@@ -19,6 +20,29 @@ public class Album {
      */
     private List<Artist> musicians;
 
+
+    public Album(String name, List<Track> tracks, List<Artist> musicians) {
+        this.name = name;
+        this.tracks = tracks;
+        this.musicians = musicians;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Album album = (Album) o;
+        return Objects.equals(name, album.name) &&
+                Objects.equals(tracks, album.tracks) &&
+                Objects.equals(musicians, album.musicians);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(name, tracks, musicians);
+    }
 
     public String getName() {
         return name;
