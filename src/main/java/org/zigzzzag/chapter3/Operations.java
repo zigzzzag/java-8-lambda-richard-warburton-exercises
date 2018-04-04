@@ -24,4 +24,19 @@ class Operations {
                 .filter(album -> album.getTracks().size() > countTracks)
                 .collect(Collectors.toList());
     }
+
+    int externalMembersCount(List<Artist> artists) {
+        int totalMembers = 0;
+        for (Artist artist : artists) {
+            Stream<Artist> members = artist.getMembersStream();
+            totalMembers += members.count();
+        }
+        return totalMembers;
+    }
+
+    int internalMembersCount(List<Artist> artists) {
+        return (int) artists.stream()
+                .flatMap(artist -> artist.getMembersStream())
+                .count();
+    }
 }

@@ -16,13 +16,33 @@ import static org.junit.Assert.assertEquals;
 
 public class OperationsTest {
 
+    private static final List<Artist> MEMBERS_TIM = Arrays.asList(
+            new Artist("Sanya", null, "Novosibirsk"),
+            new Artist("Gogi", null, "Thailand"),
+            new Artist("Pasha", null, "Zymbabve")
+    );
+
+    private static final List<Artist> MEMBERS_EGOR = Arrays.asList(
+            new Artist("Andrey", null, "Novosibirsk"),
+            new Artist("Marat", null, "Thailand"),
+            new Artist("Slava", null, "Zymbabve")
+    );
+
+    private static final List<Artist> MEMBERS_MAX = Arrays.asList(
+            new Artist("Sancho", null, "Novosibirsk"),
+            new Artist("Gogi", null, "Novosibirsk"),
+            new Artist("Shirz", null, "Novosibirsk"),
+            new Artist("Igor", null, "Novosibirsk"),
+            new Artist("Serega", null, "Novosibirsk")
+    );
+
     private static final List<Artist> ALL_ARTISTS = Arrays.asList(
-            new Artist("Timofei", null, "Novosibirsk"),
-            new Artist("Egor", null, "Thailand"),
+            new Artist("Timofei", MEMBERS_TIM, "Novosibirsk"),
+            new Artist("Egor", MEMBERS_EGOR, "Thailand"),
             new Artist("Dima", null, "Novosibirsk"),
             new Artist("Sasha", null, "Novosibirsk"),
             new Artist("Denis", null, "Thailand"),
-            new Artist("Maxim", null, "Novosibirsk")
+            new Artist("Maxim", MEMBERS_MAX, "Novosibirsk")
     );
 
     private Operations operations = new Operations();
@@ -75,7 +95,7 @@ public class OperationsTest {
 
     @Test
     public void artistInfoTest() {
-        List<String> expexted = Arrays.asList(
+        List<String> expeted = Arrays.asList(
                 "Timofei Novosibirsk",
                 "Egor Thailand",
                 "Dima Novosibirsk",
@@ -83,7 +103,7 @@ public class OperationsTest {
                 "Denis Thailand",
                 "Maxim Novosibirsk"
         );
-        Assert.assertEquals(expexted, operations.artistInfo(ALL_ARTISTS));
+        Assert.assertEquals(expeted, operations.artistInfo(ALL_ARTISTS));
     }
 
     @Test
@@ -108,5 +128,15 @@ public class OperationsTest {
         expected.add(new Album("Album 2", tracks2, ALL_ARTISTS));
 
         assertEquals(expected, operations.mostTracks(albums, 3));
+    }
+
+    @Test
+    public void externalMembersCount() {
+        assertEquals(11, operations.externalMembersCount(ALL_ARTISTS));
+    }
+
+    @Test
+    public void internalMembersCount() {
+        assertEquals(11, operations.internalMembersCount(ALL_ARTISTS));
     }
 }

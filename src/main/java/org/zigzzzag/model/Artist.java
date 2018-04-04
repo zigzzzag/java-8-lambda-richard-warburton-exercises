@@ -1,7 +1,9 @@
 package org.zigzzzag.model;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+import java.util.stream.Stream;
 
 public class Artist {
 
@@ -13,7 +15,7 @@ public class Artist {
     /**
      * A set of other artists who comprise this group (e.g., “John Lennon”); this field might be empty
      */
-    private Set<Artist> members;
+    private final List<Artist> members;
 
     /**
      * The primary location of origin of the group (e.g., “Liverpool”).
@@ -21,9 +23,13 @@ public class Artist {
     private String origin;
 
 
-    public Artist(String name, Set<Artist> members, String origin) {
+    public Artist(String name, List<Artist> members, String origin) {
         this.name = name;
-        this.members = members;
+        if (members == null) {
+            this.members = Collections.emptyList();
+        } else {
+            this.members = members;
+        }
         this.origin = origin;
     }
 
@@ -52,12 +58,12 @@ public class Artist {
         this.name = name;
     }
 
-    public Set<Artist> getMembers() {
+    public List<Artist> getMembers() {
         return members;
     }
 
-    public void setMembers(Set<Artist> members) {
-        this.members = members;
+    public Stream<Artist> getMembersStream() {
+        return members.stream();
     }
 
     public boolean isFrom(String origin) {
