@@ -9,10 +9,12 @@ import org.zigzzzag.model.Track;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class OperationsTest {
 
@@ -67,7 +69,7 @@ public class OperationsTest {
         );
         albums.add(new Album("Album 2", tracks2, ALL_ARTISTS));
 
-        List<Track> tracks3 = Arrays.asList(
+        List<Track> tracks3 = Collections.singletonList(
                 new Track("Album 3 Track 1")
         );
         albums.add(new Album("Album 3", tracks3, ALL_ARTISTS));
@@ -138,5 +140,19 @@ public class OperationsTest {
     @Test
     public void internalMembersCount() {
         assertEquals(11, operations.internalMembersCount(ALL_ARTISTS));
+    }
+
+    @Test
+    public void lowerCaseCountTest() {
+        assertEquals(2, operations.lowerCaseCount("aaAA"));
+        assertEquals(7, operations.lowerCaseCount("aa123!@#$%^&*()cndhf"));
+    }
+
+    @Test
+    public void maxLowerCaseCountTest() {
+        List<String> strs = Arrays.asList("aaAA", "bbbBBB", "ASCB");
+        assertEquals("bbbBBB", operations.maxLowerCaseCount(strs).orElse(null));
+
+        assertFalse(operations.maxLowerCaseCount(Collections.emptyList()).isPresent());
     }
 }

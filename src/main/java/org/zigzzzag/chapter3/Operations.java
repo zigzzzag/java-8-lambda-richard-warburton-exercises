@@ -4,6 +4,7 @@ import org.zigzzzag.model.Album;
 import org.zigzzzag.model.Artist;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -36,7 +37,15 @@ class Operations {
 
     int internalMembersCount(List<Artist> artists) {
         return (int) artists.stream()
-                .flatMap(artist -> artist.getMembersStream())
+                .flatMap(Artist::getMembersStream)
                 .count();
+    }
+
+    long lowerCaseCount(String str) {
+        return str.chars().filter(Character::isLowerCase).count();
+    }
+
+    Optional<String> maxLowerCaseCount(List<String> strs) {
+        return strs.stream().max((s1, s2) -> (int) (lowerCaseCount(s1) - lowerCaseCount(s2)));
     }
 }
