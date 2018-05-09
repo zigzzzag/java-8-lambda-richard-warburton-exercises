@@ -1,12 +1,22 @@
-package org.zigzzzag.chapter3;
+package org.zigzzzag.chapter3.ex02;
 
 import org.zigzzzag.model.Artist;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Stream;
 
-class Operations {
+/**
+ * <pre>
+ * 2. Iteration. Convert this code sample from using external iteration to internal iteration:
+ *
+ *  int totalMembers = 0;
+ *  for (Artist artist : artists) {
+ *      Stream<Artist> members = artist.getMembers();
+ *      totalMembers += members.count();
+ *  }
+ * </pre>
+ */
+class OperationsCh03Ex02 {
 
     int externalMembersCount(List<Artist> artists) {
         int totalMembers = 0;
@@ -21,13 +31,5 @@ class Operations {
         return (int) artists.stream()
                 .flatMap(Artist::getMembersStream)
                 .count();
-    }
-
-    long lowerCaseCount(String str) {
-        return str.chars().filter(Character::isLowerCase).count();
-    }
-
-    Optional<String> maxLowerCaseCount(List<String> strs) {
-        return strs.stream().max((s1, s2) -> (int) (lowerCaseCount(s1) - lowerCaseCount(s2)));
     }
 }

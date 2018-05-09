@@ -1,17 +1,15 @@
-package org.zigzzzag.chapter3;
+package org.zigzzzag.chapter3.ex02;
 
 import org.junit.Test;
 import org.zigzzzag.model.Artist;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.zigzzzag.model.Origin.*;
 
-public class OperationsTest {
+public class OperationsCh03Ex02Test {
 
     private static final List<Artist> MEMBERS_TIM = Arrays.asList(
             new Artist("Sanya", null, NOVOSIBIRSK),
@@ -42,7 +40,7 @@ public class OperationsTest {
             new Artist("Maxim", MEMBERS_MAX, NOVOSIBIRSK)
     );
 
-    private final Operations operations = new Operations();
+    private final OperationsCh03Ex02 operations = new OperationsCh03Ex02();
 
     @Test
     public void externalMembersCount() {
@@ -54,17 +52,5 @@ public class OperationsTest {
         assertEquals(11, operations.internalMembersCount(ALL_ARTISTS));
     }
 
-    @Test
-    public void lowerCaseCountTest() {
-        assertEquals(2, operations.lowerCaseCount("aaAA"));
-        assertEquals(7, operations.lowerCaseCount("aa123!@#$%^&*()cndhf"));
-    }
 
-    @Test
-    public void maxLowerCaseCountTest() {
-        List<String> strs = Arrays.asList("aaAA", "bbbBBB", "ASCB");
-        assertEquals("bbbBBB", operations.maxLowerCaseCount(strs).orElse(null));
-
-        assertFalse(operations.maxLowerCaseCount(Collections.emptyList()).isPresent());
-    }
 }
