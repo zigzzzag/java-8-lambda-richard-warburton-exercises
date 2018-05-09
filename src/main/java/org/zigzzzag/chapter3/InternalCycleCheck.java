@@ -5,12 +5,12 @@ import org.zigzzzag.model.Artist;
 import java.util.Iterator;
 import java.util.Set;
 
-public class InternanCycleCheck {
+class InternalCycleCheck {
 
     private final Set<Artist> allArtists;
 
 
-    InternanCycleCheck(Set<Artist> allArtists) {
+    InternalCycleCheck(Set<Artist> allArtists) {
         if (allArtists == null) {
             throw new IllegalArgumentException("Collection of artists must be not null!!!");
         }
@@ -19,7 +19,7 @@ public class InternanCycleCheck {
     }
 
 
-    public long externalCount(String origin) {
+    long externalCount(String origin) {
         long count = 0;
         Iterator<Artist> iterator = allArtists.iterator();
         while (iterator.hasNext()) {
@@ -32,7 +32,7 @@ public class InternanCycleCheck {
         return count;
     }
 
-    public long internalCount(String origin) {
+    long internalCount(String origin) {
         return allArtists.stream()
                 .filter(artist -> artist.isFrom(origin))
                 .count();

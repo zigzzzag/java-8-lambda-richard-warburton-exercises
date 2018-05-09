@@ -1,12 +1,14 @@
 package org.zigzzzag.chapter2;
 
 import javax.swing.text.DateFormatter;
+import java.text.SimpleDateFormat;
 
-public class DateFormatterThreadSafe extends DateFormatter {
+class DateFormatterThreadSafe extends DateFormatter {
 
-    private static ThreadLocal<DateFormatter> DATE_FORMATTER_THREAD_LOCAL = ThreadLocal.withInitial(DateFormatter::new);
+    private static final ThreadLocal<DateFormatter> DATE_FORMATTER_THREAD_LOCAL =
+            ThreadLocal.withInitial(() -> new DateFormatter(new SimpleDateFormat("dd.MM.yyyy")));
 
-    public static DateFormatter get() {
+    static DateFormatter get() {
         return DATE_FORMATTER_THREAD_LOCAL.get();
     }
 }
