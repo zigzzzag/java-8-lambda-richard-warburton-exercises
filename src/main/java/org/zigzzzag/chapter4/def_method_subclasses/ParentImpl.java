@@ -1,4 +1,4 @@
-package org.zigzzzag.chapter4.other;
+package org.zigzzzag.chapter4.def_method_subclasses;
 
 class ParentImpl implements Parent {
 

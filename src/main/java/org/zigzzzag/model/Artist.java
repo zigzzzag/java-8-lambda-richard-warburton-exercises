@@ -13,7 +13,7 @@ public class Artist {
     private String name;
 
     /**
-     * A set of other artists who comprise this group (e.g., “John Lennon”); this field might be empty
+     * A set of def_method_subclasses artists who comprise this group (e.g., “John Lennon”); this field might be empty
      */
     private final List<Artist> members;
 
